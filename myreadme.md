@@ -78,4 +78,4 @@ I kept it pretty much in the box with DRF. Authentication issues and if a missin
 ## Testing
 I focused on model creation and the views for the test.  Models test was to make sure they are created correctly, viewsets make sure it comes back on api calls and checks some of the serializers as well, and if it is authenticated vs not.
 
-I try to avoid testing DJANGO itself.  I've been on teams where testing basic django functionality is done.  
+I try to avoid testing DJANGO itself.  In some cases I will but 90% of the time I try to avoid testing django specifically unless I add custom admin functions. 
