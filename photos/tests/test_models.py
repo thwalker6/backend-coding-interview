@@ -22,7 +22,7 @@ class PhotographerModelTest(TestCase):
         self.assertEqual(self.photographer.url, self.photographer_data["url"])
 
     def test_photographer_string_representation(self):
-        expected = f"Felix (ID: 57767809)"
+        expected = "Felix (ID: 57767809)"
         self.assertEqual(str(self.photographer), expected)
 
     def test_photo_count_property_with_photos(self):
