@@ -8,22 +8,22 @@ ENV PYTHONUNBUFFERED 1
 
 WORKDIR /code
 
-# Install system dependencies
 RUN apt-get update && apt-get install -y \
     libpq-dev \
     gcc \
     netcat-traditional \
     && rm -rf /var/lib/apt/lists/*
 
-
 COPY requirements.txt .
-RUN pip install -r requirements.txt
-
-# Copy project files
-COPY . .
-
-# Copy and set entrypoint
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
+# INSTALL DEPENDENCIES
+RUN pip install -r requirements.txt
+
+# COPY PROJECT
+COPY . .
+
+# RUN SERVER (migrations will run at container startup)
+CMD python manage.py migrate --noinput && python manage.py runserver 0.0.0.0:8000
