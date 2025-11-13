@@ -1,5 +1,9 @@
 # API Architecture Overview
 
+
+## To run
+Run make up on the backend-coding-interview directory.    Had claude throw some other commands in there for adding migrations, linting, etc.
+
 ## Foundation & Setup
 I chose Django REST Framework (DRF) for its efficient viewset-based approach to API development. The setup includes drf-spectacular for Swagger documentation, providing an intuitive interface for API testing and exploration. The entire application is containerized using Docker for consistent deployment.
 
