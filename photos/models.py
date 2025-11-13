@@ -35,7 +35,7 @@ class Photo(models.Model):
     )
 
     avg_color = models.CharField(max_length=7)
-    alt = models.TextField(blank=True)
+    alt = models.TextField(blank=False, db_index=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
