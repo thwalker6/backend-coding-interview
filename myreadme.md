@@ -21,7 +21,7 @@ JWT token authentication secures write operations (PUT, PATCH, DELETE endpoints)
 - **alt**: Descriptive text doubling as the picture name.
 - **created_at/updated_at**: Standard audit timestamps.
 
-**Design Decision**: Eliminated storage of multiple size-specific URLs. Since these follow a predictable pattern (src_url + size parameters), the serializer dynamically generates them. This could alternatively be handled client-side, but I've implemented it at the serializer level for convenience on certain endpoints—particularly single-picture detail views.
+**Design Decision**: Eliminated storage of multiple size-specific URLs. Since these follow a predictable pattern (src_url + size parameters), the serializer dynamically generates them. This could alternatively be handled client-side, but I've implemented as model properties for convenience on certain endpoints—particularly single-picture detail views.
 
 ### Photographer Model
 A separate model manages photographer data (URL, name, ID) since multiple pictures can share the same photographer. The system uses `get_or_create` logic matching both ID and name when associating pictures with photographers.
