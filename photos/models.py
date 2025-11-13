@@ -1,17 +1,18 @@
 from django.db import models
 
+
 class Photographer(models.Model):
     photographer_id = models.IntegerField(db_index=True)
-    name = models.CharField(db_index=True,max_length=200)
+    name = models.CharField(db_index=True, max_length=200)
     url = models.URLField(max_length=500)
 
     class Meta:
-        ordering = ['name']
-        verbose_name = 'Photographer'
-        verbose_name_plural = 'Photographers'
+        ordering = ["name"]
+        verbose_name = "Photographer"
+        verbose_name_plural = "Photographers"
         indexes = [
-            models.Index(fields=['photographer_id']),
-            models.Index(fields=['name']),
+            models.Index(fields=["photographer_id"]),
+            models.Index(fields=["name"]),
         ]
 
     def __str__(self):
@@ -21,6 +22,7 @@ class Photographer(models.Model):
     def photo_count(self):
         return self.photos.count()
 
+
 class Photo(models.Model):
     photo_id = models.IntegerField(unique=True, db_index=True)
     width = models.IntegerField()
@@ -29,11 +31,9 @@ class Photo(models.Model):
     src_url = models.URLField(max_length=500)
 
     photographer = models.ForeignKey(
-        Photographer,
-        on_delete=models.CASCADE,
-        related_name='photos'
+        Photographer, on_delete=models.CASCADE, related_name="photos"
     )
-    
+
     avg_color = models.CharField(max_length=7)
     alt = models.TextField(blank=True)
 
@@ -41,12 +41,12 @@ class Photo(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ['-id']
-        verbose_name = 'Photo'
-        verbose_name_plural = 'Photos'
+        ordering = ["-id"]
+        verbose_name = "Photo"
+        verbose_name_plural = "Photos"
         indexes = [
-            models.Index(fields=['id']),
-            models.Index(fields=['photographer']),
+            models.Index(fields=["id"]),
+            models.Index(fields=["photographer"]),
         ]
 
     def __str__(self):
@@ -61,7 +61,7 @@ class Photo(models.Model):
     @property
     def landscape_url(self):
         return self.src_url + "?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"
-    
+
     @property
     def tiny_pic_url(self):
         return self.src_url + "?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280"
@@ -69,12 +69,15 @@ class Photo(models.Model):
     @property
     def extra_large_pic_url(self):
         return self.src_url + "?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+
     @property
     def large_pic_url(self):
         return self.src_url + "?auto=compress&cs=tinysrgb&h=650&w=940"
+
     @property
     def small_pic_url(self):
         return self.src_url + "?auto=compress&cs=tinysrgb&h=130"
+
     @property
     def medium_pic_url(self):
         return self.src_url + "?auto=compress&cs=tinysrgb&h=350"
